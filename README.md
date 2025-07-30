@@ -22,9 +22,40 @@ This is a very basic Express server with logging (using [Morgan](https://github.
    ```
    The server will listen on port `3000` by default.
 
-3. **Test your reverse proxy:**  
+3. **Test endpoints:**
+
+   - **With Postman:**
+     Import the file `express-test-server.postman_collection.json` into Postman to quickly test all endpoints (GET/POST/PUT/DELETE on `/test`, `/`, `/ping`, and a 404 case).
+
+
+   - **With cURL:**
+     Use these commands in your terminal to test endpoints:
+     ```sh
+     # Home endpoint
+     curl -i http://localhost:3000/
+
+     # GET /test
+     curl -i http://localhost:3000/test
+
+     # POST /test
+     curl -i -X POST http://localhost:3000/test
+
+     # PUT /test
+     curl -i -X PUT http://localhost:3000/test
+
+     # DELETE /test
+     curl -i -X DELETE http://localhost:3000/test
+
+     # GET /ping
+     curl -i http://localhost:3000/ping
+
+     # 404 Not Found example
+     curl -i http://localhost:3000/doesnotexist
+     ```
+
+4. **Test your reverse proxy:**  
    Point your reverse proxy to `http://localhost:3000/` and check the logs/output.
 
 ---
 
-*This project is for testing and development
+*This project is for testing and development*
