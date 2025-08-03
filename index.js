@@ -1,12 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Logging middleware
 app.use(morgan('combined'));
-
 
 // Color helper functions
 const colors = {
@@ -18,6 +18,9 @@ const colors = {
   magenta: '\x1b[35m',
   cyan: '\x1b[36m',
 };
+
+// Secret key for JWT (in a real application, store this securely)
+const JWT_SECRET = 'your_jwt_secret_key';
 
 // Basic route
 app.get('/', (req, res) => {
@@ -53,6 +56,17 @@ app.delete('/test', (req, res) => {
 app.get('/ping', (req, res) => {
   console.log(colors.magenta + '[GET /ping] Ping endpoint hit' + colors.reset);
   res.send('pong');
+});
+
+// Endpoint to generate a JWT token
+app.post('/token', (req, res) => {
+  const user = { id: 1, username: 'testuser' }; // Example user data
+
+  // Generate a token
+  const token = jwt.sign(user, JWT_SECRET, { expiresIn: '1h' });
+
+  console.log(colors.green + '[POST /token] Token generated for user' + colors.reset);
+  res.json({ token });
 });
 
 // Catch-all route for testing reverse proxy

@@ -53,7 +53,26 @@ This is a very basic Express server with logging (using [Morgan](https://github.
      curl -i http://localhost:3000/doesnotexist
      ```
 
-4. **Test your reverse proxy:**  
+4. **Test JWT Token Generation:**
+
+   - **With Postman:**
+     Use the `POST /token` endpoint to generate a JWT token. Example request:
+     ```json
+     {
+       "id": 1,
+       "username": "testuser"
+     }
+     ```
+     The response will include a token that you can use for authentication.
+
+   - **With cURL:**
+     Run the following command to generate a token:
+     ```sh
+     curl -i -X POST http://localhost:3000/token
+     ```
+     The response will include a JSON object with the token.
+
+5. **Test your reverse proxy:**  
    Point your reverse proxy to `http://localhost:3000/` and check the logs/output.
 
 ---
